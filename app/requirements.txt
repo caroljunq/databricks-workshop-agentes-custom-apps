@@ -1,0 +1,10 @@
+streamlit>=1.50
+altair>=5.4
+pandas>=2.2
+databricks-sdk>=0.89.0
+langchain-openai>=1.0
+httpx>=0.27
+langgraph>=1.0
+langgraph-checkpoint-postgres>=3.0
+langchain-core>=1.0
+psycopg[binary]>=3.2

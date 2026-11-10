@@ -1,0 +1,58 @@
+# =============================================================================
+# app.yaml — Databricks App do Assistente Regulatório
+# (Streamlit + LangGraph + Lakebase para sessões/memória/documentos + Genie via OBO)
+#
+# Substitua SOMENTE os valores marcados com xxxxxxx.
+# Onde obter cada valor: notebook_guia_workshop.ipynb (Blocos 5, 7).
+# =============================================================================
+
+command:
+  - streamlit
+  - run
+  - app.py
+
+env:
+  # Modelo de linguagem (catálogo system.ai, via AI Gateway). Padrão do workshop: Claude Sonnet.
+  # O app chama o AI Gateway (system.ai) com o service principal do app.
+  - name: MODEL_ENDPOINT
+    value: "system.ai.claude-sonnet-5-5"
+
+  # Endpoint de embeddings (mesmo modelo usado para gerar os chunks do relatório).
+  - name: EMBEDDING_ENDPOINT
+    value: "system.ai.qwen3-embedding-0-6b"
+
+  # ID do Genie Space criado no workshop (notebook, Seção 4).
+  # Obter: abra o Genie Space e copie o ID da URL: .../genie/rooms/<ID>
+  - name: GENIE_SPACE_ID
+    value: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+  # Lakebase: o runtime injeta PGHOST, PGDATABASE, PGPORT, PGUSER e PGSSLMODE
+  # quando o recurso postgres está anexado ao app (notebook, Seção 6).
+  # NÃO colocar host, usuário ou senha aqui.
+  - name: LAKEBASE_ENDPOINT
+    valueFrom: postgres
+
+  # Tabela com os chunks do relatório no schema public do Lakebase (notebook, Seção 3).
+  - name: DOCUMENTOS_TABELA
+    value: "documentos_chunks"
+
+# Autorização de usuário (On-Behalf-Of): o app recebe o token do usuário no header
+# x-forwarded-access-token e o usa para consultar o Genie e chamar modelos via Unity Gateway.
+# Escopos mínimos (iguais aos de Settings → User authorization):
+#   sql         — executar SQL / gerenciar recursos SQL
+#   genie       — acessar o Databricks Genie
+#   ai-gateway  — rotear requisições de inferência pelo Unity Gateway
+user_api_scopes:
+  - "sql"
+  - "genie"
+  - "ai-gateway"
+
+# Permissões genéricas do service principal do app. O bind concreto (qual endpoint, qual warehouse)
+# é feito pelo próprio app/recursos quando necessário.
+permissions:
+  - permission: CAN_USE
+    level: APP
+    resource_type: servingEndpoints
+  - permission: CAN_USE
+    level: APP
+    resource_type: sql

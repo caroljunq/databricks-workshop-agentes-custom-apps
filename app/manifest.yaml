@@ -1,0 +1,3 @@
+version: 1
+name: "Assistente Regulatorio (workshop)"
+description: "Chat com agente LangGraph: relatorio regulatorio (Lakebase), Genie via OBO (Unity Catalog), sessoes e memoria no Lakebase. Dados ficticios."

@@ -1,0 +1,112 @@
+{
+  "volume_anual_mi_m3": {
+    "2022": 419.2,
+    "2023": 437.3,
+    "2024": 459.8,
+    "2025": 476.6
+  },
+  "clientes_dez": {
+    "2022": 969692,
+    "2023": 1006626,
+    "2024": 1047030,
+    "2025": 1087172
+  },
+  "perdas_media_ano": {
+    "2022": 2.07,
+    "2023": 1.95,
+    "2024": 1.79,
+    "2025": 1.65,
+    "2026": 1.52
+  },
+  "perdas_media_regiao_2025": {
+    "Capital": 1.42,
+    "Litoral": 1.8,
+    "Planalto Norte": 2.31,
+    "Vale do Rio Claro": 1.59,
+    "Zona Industrial Sul": 1.11
+  },
+  "emerg_media_regiao_2025": {
+    "Capital": 21.3,
+    "Litoral": 28.7,
+    "Planalto Norte": 36.3,
+    "Vale do Rio Claro": 24.9,
+    "Zona Industrial Sul": 19.6
+  },
+  "invest_ano_mi_rs": {
+    "2022": 211.9,
+    "2023": 215.0,
+    "2024": 253.3,
+    "2025": 254.1
+  },
+  "volume_regiao_2025_mi_m3": {
+    "Capital": 129.6,
+    "Litoral": 60.2,
+    "Planalto Norte": 43.3,
+    "Vale do Rio Claro": 79.2,
+    "Zona Industrial Sul": 164.3
+  },
+  "rede_km_2025_dez": {
+    "Capital": 3508.0,
+    "Litoral": 1867.0,
+    "Planalto Norte": 1494.0,
+    "Vale do Rio Claro": 2320.0,
+    "Zona Industrial Sul": 1675.0
+  },
+  "vazamentos_litoral_jul_2024": 123,
+  "tarifa_2026t3": [
+    {
+      "segmento": "Residencial",
+      "faixa_consumo": "Faixa 1 (até 20 m3/mês)",
+      "margem_distribuicao_rs_m3": 2.4088,
+      "tarifa_final_rs_m3": 6.6209
+    },
+    {
+      "segmento": "Residencial",
+      "faixa_consumo": "Faixa 2 (acima de 20 m3/mês)",
+      "margem_distribuicao_rs_m3": 2.82,
+      "tarifa_final_rs_m3": 7.0253
+    },
+    {
+      "segmento": "Comercial",
+      "faixa_consumo": "Faixa 1 (até 2.000 m3/mês)",
+      "margem_distribuicao_rs_m3": 1.8213,
+      "tarifa_final_rs_m3": 5.7593
+    },
+    {
+      "segmento": "Comercial",
+      "faixa_consumo": "Faixa 2 (acima de 2.000 m3/mês)",
+      "margem_distribuicao_rs_m3": 1.5275,
+      "tarifa_final_rs_m3": 5.4236
+    },
+    {
+      "segmento": "Industrial",
+      "faixa_consumo": "Faixa 1 (até 20.000 m3/mês)",
+      "margem_distribuicao_rs_m3": 1.034,
+      "tarifa_final_rs_m3": 4.3751
+    },
+    {
+      "segmento": "Industrial",
+      "faixa_consumo": "Faixa 2 (20.000 a 200.000 m3/mês)",
+      "margem_distribuicao_rs_m3": 0.752,
+      "tarifa_final_rs_m3": 4.0315
+    },
+    {
+      "segmento": "Industrial",
+      "faixa_consumo": "Faixa 3 (acima de 200.000 m3/mês)",
+      "margem_distribuicao_rs_m3": 0.5523,
+      "tarifa_final_rs_m3": 3.8164
+    },
+    {
+      "segmento": "GNV",
+      "faixa_consumo": "Faixa única",
+      "margem_distribuicao_rs_m3": 0.8695,
+      "tarifa_final_rs_m3": 4.362
+    },
+    {
+      "segmento": "Cogeração",
+      "faixa_consumo": "Faixa única",
+      "margem_distribuicao_rs_m3": 0.6815,
+      "tarifa_final_rs_m3": 3.8679
+    }
+  ]
+}

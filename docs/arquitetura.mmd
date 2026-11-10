@@ -1,0 +1,77 @@
+flowchart TB
+  title["Arquitetura — Assistente Regulatório (workshop)"]
+
+  subgraph F1["Fluxo 1 — Dados não estruturados"]
+    direction LR
+    PDF["PDF regulatório<br/>(Volume)"]
+    PARSE["ai_parse_document"]
+    DOCS["documentos_parseados"]
+    CHUNK["chunks + ai_query<br/>(embedding)"]
+    CHUNKS["documentos_chunks"]
+    LOAD["carga"]
+    LB1[("Lakebase<br/>pgvector")]
+
+    PDF --> PARSE --> DOCS --> CHUNK --> CHUNKS --> LOAD --> LB1
+  end
+
+  subgraph F2["Fluxo 2 — Dados estruturados"]
+    direction LR
+    CSV["CSVs<br/>(Volume)"]
+    READ["read_files"]
+    UC["indicadores_operacionais<br/>tarifas_segmento<br/>(Unity Catalog)"]
+    GENIE["Genie Space"]
+
+    CSV --> READ --> UC --> GENIE
+  end
+
+  subgraph F3["Fluxo 3 — App"]
+    direction TB
+    APP["Databricks App<br/>(Streamlit)"]
+    AGENT["Agente LangGraph<br/>Claude Sonnet / system.ai"]
+
+    subgraph TOOLS["Ferramentas"]
+      direction TB
+      T1["buscar_documentos"]
+      T2["consultar_dados"]
+      T3["salvar / buscar memória"]
+      T4["sessões e histórico<br/>(checkpoints LangGraph)"]
+    end
+
+    LB2[("Lakebase<br/>pgvector")]
+    LB3[("Lakebase<br/>memória + checkpoints")]
+    GENIE2["Genie Space<br/>(OBO)"]
+
+    APP --> AGENT
+    AGENT --> T1
+    AGENT --> T2
+    AGENT --> T3
+    AGENT --> T4
+
+    T1 --> LB2
+    T2 --> GENIE2
+    T3 --> LB3
+    T4 --> LB3
+  end
+
+  LB1 -.->|vetores| LB2
+  GENIE -.->|consultas| GENIE2
+
+  classDef titleStyle fill:#1B3139,stroke:#1B3139,color:#FFFFFF,font-weight:bold
+  classDef source fill:#FFFFFF,stroke:#5F6B7A,stroke-width:1.5px,color:#1B3139
+  classDef process fill:#E8F1FB,stroke:#247DDE,stroke-width:1.5px,color:#1B3139
+  classDef table fill:#F0F3F6,stroke:#5F6B7A,stroke-width:1.5px,color:#1B3139
+  classDef store fill:#FFF1EE,stroke:#FF3621,stroke-width:2px,color:#1B3139
+  classDef app fill:#E8F1FB,stroke:#FF3621,stroke-width:2px,color:#1B3139
+  classDef agent fill:#1B3139,stroke:#1B3139,stroke-width:1.5px,color:#FFFFFF
+  classDef tool fill:#FFFFFF,stroke:#247DDE,stroke-width:1.5px,color:#1B3139
+  classDef genie fill:#E6F4EA,stroke:#34A853,stroke-width:1.5px,color:#1B3139
+
+  class title titleStyle
+  class PDF,CSV source
+  class PARSE,CHUNK,LOAD,READ process
+  class DOCS,CHUNKS,UC table
+  class LB1,LB2,LB3 store
+  class APP app
+  class AGENT agent
+  class T1,T2,T3,T4 tool
+  class GENIE,GENIE2 genie
